@@ -1,0 +1,74 @@
+CREATE DATABASE books;
+USE books;
+
+-- Users Table
+CREATE TABLE `users` (
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR(100) NOT NULL,
+    `email` VARCHAR(100) NOT NULL UNIQUE,
+    `password` VARCHAR(255) NOT NULL,
+    `role` ENUM('admin', 'student') DEFAULT 'student',
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Cart Table
+CREATE TABLE `cart` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `user_id` INT NOT NULL,
+    `name` VARCHAR(100) NOT NULL,
+    `price` INT NOT NULL,
+    `quantity` INT NOT NULL,
+    `image` VARCHAR(100) NOT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE
+);
+
+-- Message Table
+CREATE TABLE `message` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `user_id` INT NOT NULL,
+    `name` VARCHAR(100) NOT NULL,
+    `email` VARCHAR(100) NOT NULL,
+    `number` VARCHAR(12) NOT NULL,
+    `message` VARCHAR(500) NOT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE
+);
+
+-- Orders Table
+CREATE TABLE `orders` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `user_id` INT NOT NULL,
+    `name` VARCHAR(100) NOT NULL,
+    `number` VARCHAR(12) NOT NULL,
+    `email` VARCHAR(100) NOT NULL,
+    `method` VARCHAR(50) NOT NULL,
+    `address` VARCHAR(500) NOT NULL,
+    `total_products` VARCHAR(1000) NOT NULL,
+    `total_price` INT NOT NULL,
+    `placed_on` VARCHAR(50) NOT NULL,
+    `payment_status` VARCHAR(20) NOT NULL DEFAULT 'pending',
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE
+);
+
+-- Products Table
+CREATE TABLE `products` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(100) NOT NULL,
+    `price` INT NOT NULL,
+    `image` VARCHAR(100) NOT NULL,
+    PRIMARY KEY (`id`)
+);
+
+-- Register Table
+CREATE TABLE `register` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(100) NOT NULL,
+    `email` VARCHAR(100) NOT NULL,
+    `password` VARCHAR(100) NOT NULL,
+    `user_type` VARCHAR(20) NOT NULL DEFAULT 'user',
+    PRIMARY KEY (`id`)
+);
+
+COMMIT;
