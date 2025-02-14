@@ -1,15 +1,32 @@
-# bookstore
+# E-Library Web Application
 
-Developed using HTML, CSS, JavaScript, and PHP technologies</br>
-Features : </br>
-<ul>
-  <li>Admin and user login functionality</li>
-  <li>Admin dashboard for product management, order tracking, user removal, message handling, Record keeping of pending and completed payments, overview of total admin and user accounts</li>
-  <li>User-friendly cart system with the ability to add, search, and delete items</li>
-  <li>Intuitive search functionality for quick product discovery</li>
-  <li>Checkout process to add delivery details</li>
-  <li>User messaging system for queries and assistance</li>
-</ul>
-</br>
-Output :
-![image](https://github.com/tanishahaha/bookstore/assets/123636127/058007f4-2a15-4e28-9125-201278497939)
+## Overview
+This is a web-based library management system that allows users to browse, read, and download books. Admins can manage books and user accounts.
+
+## Features
+- **User Authentication**: Login and registration for students and admins.
+- **Book Management**: Admins can add, update, and delete books.
+- **Search Functionality**: Students can search for books by title, author, or genre.
+- **Book Details**: View book details and download books.
+- **Responsive Design**: Works on all devices.
+
+## Technologies Used
+- **Frontend**: HTML, CSS, JavaScript, Bootstrap.
+- **Backend**: PHP, MySQL.
+- **Database**: MySQL.
+
+## Installation
+1. Clone the repository.
+2. Import the `e_library.sql` file into your MySQL database.
+3. Update the database connection details in `includes/db.php`.
+4. Run the application using a local server (e.g., XAMPP).
+
+## Usage
+- **Admin**: Login with admin credentials to manage books.
+- **Student**: Login to browse and download books.
+
+## Contributors
+- 
+
+## License
+This project is licensed under the MIT License.
