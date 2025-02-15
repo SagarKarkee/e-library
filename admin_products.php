@@ -134,12 +134,12 @@ if(isset($_POST['update_product'])){
 
 .product_box {
   background-color: white;
-    padding: 1.5rem;
-    width: 100%;
-    height: 100%;
-    border-radius: 30px;
-    text-align: center;
-    box-shadow: 2px 2px 15px gray;
+  padding: 1.5rem;
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  text-align: center;
+  box-shadow: 2px 2px 15px gray;
 }
 
 .product_box:hover {
@@ -215,8 +215,7 @@ if(isset($_POST['update_product'])){
   font-size: 18px;
 }
 
-
-  </style>
+</style>
 </head>
 <body>
 

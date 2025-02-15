@@ -79,7 +79,16 @@ include 'admin_header.php';
         $number_of_products=mysqli_num_rows($select_products);
       ?>
       <h3><?php echo $number_of_products; ?></h3>
-      <p>Products Added</p>
+      <p>Book Added</p>
+    </div>
+
+    <div class="admin_box">
+      <?php
+        $select_products=mysqli_query($conn,"SELECT * FROM `media_files`") or die('query failed');
+        $number_of_products=mysqli_num_rows($select_products);
+      ?>
+      <h3><?php echo $number_of_products; ?></h3>
+      <p>Media Added</p>
     </div>
 
     <div class="admin_box">
