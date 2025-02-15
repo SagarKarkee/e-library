@@ -42,10 +42,7 @@ if (isset($_POST['add_to_cart'])) {
 </head>
 
 <body>
-
-  <?php
-  include 'user_header.php';
-  ?>
+  <?php include 'user_header.php'; ?>
 
   <section class="home_cont">
     <div class="main_descrip">
@@ -92,10 +89,10 @@ if (isset($_POST['add_to_cart'])) {
   </section>
 
   <section class="about_cont">
-    <img src="about.jpg" alt="">
+    <img src="library-1.jpg" alt="">
     <div class="about_descript">
       <h2>Discover Our Story</h2>
-      <p>At Bookiee, we are passionate about connecting readers with captivating stories, inspiring ideas, and a world of knowledge. Our bookstore is more than just a place to buy books; it's a haven for book enthusiasts, where the love for literature thrives.
+      <p>At Kitab, we are passionate about connecting readers with captivating stories, inspiring ideas, and a world of knowledge. Our library is more than just a place to buy books; it's a haven for book enthusiasts, where the love for literature thrives.
     </p>
     <button class="product_btn" onclick="window.location.href='about.php';">Read More</button>
     </div>
@@ -104,18 +101,13 @@ if (isset($_POST['add_to_cart'])) {
   <section class="questions_cont">
     <div class="questions">
     <h2>Have Any Queries?</h2>
-    <p>At Bookiee, we value your satisfaction and strive to provide exceptional customer service. If you have any questions, concerns, or inquiries, our dedicated team is here to assist you every step of the way.</p>
+    <p>At Kitab, we value your satisfaction and strive to provide exceptional customer service. If you have any questions, concerns, or inquiries, our dedicated team is here to assist you every step of the way.</p>
     <button class="product_btn">Contact Us</button>
     </div>
     
   </section>
-  <?php
-  include 'footer.php';
-  ?>
-  <script src="https://kit.fontawesome.com/eedbcd0c96.js" crossorigin="anonymous"></script>
 
-  <script src="script.js"></script>
-
+  <script src="admin_js.js"></script>
+<script src="https://kit.fontawesome.com/eedbcd0c96.js" crossorigin="anonymous"></script>
 </body>
-
 </html>

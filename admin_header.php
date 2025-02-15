@@ -19,6 +19,7 @@ if(isset($message)){
       <nav class="header_navbar">
         <a href="admin_page.php">Home</a>
         <a href="admin_products.php">Products</a>
+        <a href="upload.php">Media</a>
         <a href="admin_orders.php">Borrow</a>
         <a href="admin_users.php">Users</a>
         <a href="admin_messages.php">Messages</a>

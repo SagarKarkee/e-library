@@ -1,0 +1,204 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    line-height: 1.6;
+}
+
+h2, h3, h4 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    
+}
+
+.alert {
+    position: relative;
+    padding: 12px 40px 12px 20px;
+    margin: 1rem 0;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.alert.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
+
+.alert.error {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+}
+
+.alert .close-btn {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: inherit;
+}
+
+.alert .close-btn:hover {
+    color: #000;
+}
+
+/* Upload Container */
+.upload-container {
+    background: #ffffff;
+    padding: 2rem 4em;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+.upload-container h3 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #34495e;
+}
+
+.upload-container label {
+    display: block;
+    margin: 1rem 0 0.5rem;
+    font-weight: 600;
+    color: #555;
+}
+
+.upload-container input[type="text"],
+.upload-container input[type="file"],
+.upload-container input[type="submit"] {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.upload-container input[type="text"]:focus,
+.upload-container input[type="file"]:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.upload-container input[type="submit"] {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.upload-container input[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+/* Thumbnail Preview */
+#thumbnailPreview {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Media Items */
+.media-item {
+    background: #ffffff;
+    padding: 1.5rem;
+    margin: 2rem auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+}
+
+.media-item h4 {
+    margin-top: 0;
+    font-size: 1.25rem;
+    color: #34495e;
+}
+
+.media-item img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1rem 0;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+}
+
+.media-item audio {
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.media-item form {
+    margin-top: 1.5rem;
+}
+
+.media-item label {
+    display: block;
+    margin: 1rem 0 0.5rem;
+    font-weight: 600;
+    color: #555;
+}
+
+.media-item input[type="text"],
+.media-item input[type="file"],
+.media-item input[type="submit"] {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.media-item input[type="text"]:focus,
+.media-item input[type="file"]:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.media-item input[type="submit"] {
+    background-color: #2ecc71;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.media-item input[type="submit"]:hover {
+    background-color: #27ae60;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .upload-container,
+    .media-item {
+        padding: 1rem;
+        margin: 1rem;
+    }
+
+    .upload-container h3 {
+        font-size: 1.25rem;
+    }
+
+    .media-item h4 {
+        font-size: 1rem;
+    }
+}

@@ -1,5 +1,5 @@
-CREATE DATABASE books;
-USE books;
+CREATE DATABASE Book;
+USE Book;
 
 -- Cart Table
 CREATE TABLE `cart` (
@@ -60,5 +60,20 @@ CREATE TABLE `register` (
     `user_type` VARCHAR(20) NOT NULL DEFAULT 'user',
     PRIMARY KEY (`id`)
 );
+
+--media table
+CREATE TABLE media_files (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    filename VARCHAR(255) NOT NULL,
+    file_path VARCHAR(255) NOT NULL,
+    file_type ENUM('audio', 'video') NOT NULL,
+    upload_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    title VARCHAR(255)
+);
+
+--also add the this to the media table
+ALTER TABLE media_files
+ADD COLUMN thumbnail_path VARCHAR(255) AFTER file_path;
+
 
 COMMIT;
