@@ -40,6 +40,8 @@
   color: #003049;
 }
 
+/* shop Page */
+
 .products_cont{
   margin: 4rem;
 }
@@ -83,6 +85,44 @@
   position: absolute;
   top: 1rem;
   left: 1rem;
+}
+
+.abstract {
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  text-align: center;
+  margin: 10px 0;
+  padding: 7px 10px;
+  box-sizing: border-box;
+  font-size: 14px;
+  white-space: normal; 
+  overflow: auto; /* Optional: to add scrollbars if content overflows */
+}
+
+
+
+/* .pdf_link_btn{
+  display: inline-block;
+  margin: 10px 0;
+  text-decoration: none;
+  color: #007BFF;
+  font-weight: bold;
+}
+.pdf_link:hover {
+  text-decoration: underline;
+} */
+.product_btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.product_btn:hover {
+  background-color: #218838;
 }
 
 .about_cont,
