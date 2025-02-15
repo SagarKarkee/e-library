@@ -16,22 +16,22 @@ if(isset($message)){
       <div class="logo_cont">
         <img src="book_logo.png" alt="">
 
-        <a href="home.php" class="book_logo">Bookiee</a>
+        <a href="home.php" class="book_logo">Kitab</a>
       </div>
 
 
       <nav class="navbar">
         <a href="home.php">Home</a>
-        <a href="about.php">About</a>
-        <a href="shop.php">Shop</a>
+        <a href="shop.php">Books</a>
+        <a href="orders.php">Borrow</a>
         <a href="contact.php">Contact</a>
-        <a href="orders.php">Orders</a>
+        <a href="about.php">About</a>
       </nav>
 
-      <div class="last_part">
+      <!-- <div class="last_part">
         <div class="loginorreg">
           <p>New <a href="login.php">Login</a> | <a href="register.php">Register</a></p>
-        </div>
+        </div> -->
 
         <div class="icons">
         <!-- <i class="fa-solid fa-magnifying-glass"></i> -->

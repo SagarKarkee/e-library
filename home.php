@@ -74,6 +74,10 @@ if (isset($_POST['add_to_cart'])) {
             <input type="hidden" name="product_price" value="<?php echo $fetch_products['price']; ?>">
             <input type="hidden" name="product_image" value="<?php echo $fetch_products['image']; ?>">
 
+            <!-- Placeholder for Abstract and PDF Link -->
+            <div class="abstract">Abstract: <?php echo $fetch_products['abstract']; ?></div>
+                    <a href="./uploaded_pdfs/<?php echo $fetch_products['pdf']; ?>" target="_blank" class="product_btn">View PDF</a>
+
             <input type="submit" value="Add to Cart" name="add_to_cart" class="product_btn">
 
           </form>
