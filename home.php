@@ -106,8 +106,9 @@ if (isset($_POST['add_to_cart'])) {
     </div>
     
   </section>
-
-  <script src="admin_js.js"></script>
-<script src="https://kit.fontawesome.com/eedbcd0c96.js" crossorigin="anonymous"></script>
+ 
+  <script src="https://kit.fontawesome.com/eedbcd0c96.js" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+    <?php include 'footer.php';?>
 </body>
 </html>
