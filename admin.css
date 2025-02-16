@@ -41,6 +41,7 @@
 .admin_box_container{
     display: flex;
     flex-wrap: wrap;
+    margin-top: -60px;
 }
 
 .admin_add_products{
@@ -58,6 +59,7 @@
     box-shadow: 2px 2px 10px gray;
     display: flex;
     flex-direction: column;
+    margin-top: -100px;
 }
 
 .admin_add_products form h3{

@@ -77,7 +77,7 @@ include 'admin_header.php';
     <?php
         }
       }else{
-        echo '<p class="empty">No orders placed yet!</p>';
+        echo '<p class="empty">No Borrow request placed yet!</p>';
       }
     ?>
     
