@@ -91,6 +91,6 @@ if (!isset($user_id)) {
     </div>
     <script src="https://kit.fontawesome.com/eedbcd0c96.js" crossorigin="anonymous"></script>
     <script src="script.js"></script>
-    <? include 'footer.php';?>
+    <?php include 'footer.php';?>
 </body>
 </html>

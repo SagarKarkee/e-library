@@ -60,6 +60,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_products_btn'])) {
         echo "<div class='alert error'>No files uploaded. <button class='close-btn'>&times;</button></div>";
     }
 }
+// Handle delete request
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_media_btn'])) {
+    $media_id = $_POST['media_id'];
+
+    // Fetch file paths before deleting
+    $sql = "SELECT file_path, thumbnail_path FROM media_files WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $media_id);
+    $stmt->execute();
+    $stmt->bind_result($file_path, $thumbnail_path);
+    $stmt->fetch();
+    $stmt->close();
+
+    // Delete files from the server
+    if (file_exists($file_path)) {
+        unlink($file_path);
+    }
+    if (file_exists($thumbnail_path)) {
+        unlink($thumbnail_path);
+    }
+
+    // Delete from database
+    $sql = "DELETE FROM media_files WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $media_id);
+    if ($stmt->execute()) {
+        echo "<div class='alert success'>Media deleted successfully. <button class='close-btn'>&times;</button></div>";
+    } else {
+        echo "<div class='alert error'>Error deleting media. <button class='close-btn'>&times;</button></div>";
+    }
+    $stmt->close();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -118,6 +151,7 @@ if ($result->num_rows > 0) {
                 <label>Thumbnail Image:</label>
                 <input type='file' name='thumbnail' accept='image/*'><br>
                 <input type='submit' name='update_media_btn' value='Update Media'>
+                <button type='submit' name='delete_media_btn' style='background-color: red; color: white;'>Delete</button>
             </form>
         </div>";
     }
@@ -125,7 +159,6 @@ if ($result->num_rows > 0) {
     echo "<p>No media files found.</p>";
 }
 ?>
-
 <script>
     // Thumbnail Preview
     function previewThumbnail() {
@@ -154,7 +187,6 @@ if ($result->num_rows > 0) {
 
 </body>
 </html>
-
 <?php
 $conn->close();
 ?>
