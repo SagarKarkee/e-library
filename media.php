@@ -15,70 +15,72 @@ if (!isset($user_id)) {
 <html>
 <head>
     <title>View Media</title>
-    <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="style.css"> 
     <style>
     .media-container {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 20px;
         padding: 20px;
-        width: 100%;
     }
-    
+
     .media-item {
         border-radius: 8px;
         overflow: hidden;
-        background: #fff;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        transition: transform 0.2s;
-        width: 100%;
-    }
-    
-    .media-item:hover {
-        transform: translateY(-5px);
-    }
-    
-    .media-thumbnail {
+        background: #000;
         position: relative;
-        width: 100%;
-        padding-top: 56.25%; /* 16:9 aspect ratio */
-        overflow: hidden;
+        cursor: pointer;
+        aspect-ratio: 16/9;
     }
-    
-    .media-thumbnail img {
+
+    .media-thumbnail {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
+        transition: opacity 0.3s ease;
     }
-    
-    .media-info {
-        padding: 12px;
-    }
-    
-    .media-info h4 {
-        margin: 0 0 8px 0;
-        font-size: 14px;
-        color: #333;
-        line-height: 1.4;
-        height: 40px;
-        overflow: hidden;
-    }
-    
+
     .media-player {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        margin-top: 10px;
-    }
-    
-    video {
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.3s ease;
         background: #000;
     }
-    
-    audio {
-        width: 100%;
-        height: 40px;
+
+    .media-item:hover .media-thumbnail {
+        opacity: 0;
+    }
+
+    .media-item:hover .media-player {
+        opacity: 1;
+    }
+
+    /* Show video when playing (even if not hovering) */
+    .media-player.playing {
+        opacity: 1;
+        z-index: 2;
+    }
+
+    .media-info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 10px;
+        background: linear-gradient(transparent, rgba(0,0,0,0.7));
+        color: white;
+        z-index: 3;
+    }
+
+    video.media-player {
+        object-fit: cover;
     }
 </style>
 </head>
@@ -100,24 +102,23 @@ if (!isset($user_id)) {
 
                     echo "
                     <div class='media-item'>
-                        <div class='media-thumbnail'>
-                            <img src='$thumbnailPath' alt='Thumbnail'>
-                        </div>
+                        <img class='media-thumbnail' src='$thumbnailPath' alt='Thumbnail'>
+                        
                         <div class='media-info'>
                             <h4>$title</h4>
-                    ";
+                        </div>";
                     
                     if ($fileType == 'audio') {
                         echo "<audio class='media-player' controls>
                                 <source src='$filePath' type='audio/mp3'>
-                            </audio>";
+                              </audio>";
                     } else if ($fileType == 'video') {
-                        echo "<video class='media-player' controls>
+                        echo "<video class='media-player' muted controls>
                                 <source src='$filePath' type='video/mp4'>
-                            </video>";
+                              </video>";
                     }
                     
-                    echo "</div></div>";
+                    echo "</div>";
                 }
             } else {
                 echo "<p>No media files found.</p>";
@@ -135,53 +136,47 @@ if (!isset($user_id)) {
 
 
     <script src="https://kit.fontawesome.com/eedbcd0c96.js" crossorigin="anonymous"></script>
-    <script src="script.js">
-        document.addEventListener("DOMContentLoaded", () => {
-            const mediaItems = document.querySelectorAll(".media-item");
-
-            mediaItems.forEach((item) => {
-                const video = item.querySelector("video");
-                const thumbnail = item.querySelector("img");
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle video interactions
+            document.querySelectorAll('.media-item').forEach(item => {
+                const video = item.querySelector('video');
+                const thumbnail = item.querySelector('.media-thumbnail');
 
                 if (video) {
-                    // Hide the thumbnail when hovering
-                    item.addEventListener("mouseenter", () => {
-                        thumbnail.style.opacity = "0"; // Hide thumbnail
-                        thumbnail.style.pointerEvents = "none"; // Allow video interactions
-                        video.play();
-                    });
-
-                    // Show the thumbnail when mouse leaves (if video is not playing)
-                    item.addEventListener("mouseleave", () => {
+                    // Play/pause on click
+                    item.addEventListener('click', function(e) {
                         if (video.paused) {
-                            thumbnail.style.opacity = "1"; // Show thumbnail
-                            thumbnail.style.pointerEvents = "auto"; // Block video interactions
+                            video.play();
+                            video.classList.add('playing');
+                        } else {
+                            video.pause();
+                            video.classList.remove('playing');
                         }
                     });
 
-                    // Ensure video remains interactive when played
-                    video.addEventListener("play", () => {
-                        thumbnail.style.opacity = "0"; // Keep thumbnail hidden
-                        thumbnail.style.pointerEvents = "none"; // Allow video interactions
+                    // Handle video states
+                    video.addEventListener('play', () => {
+                        video.classList.add('playing');
+                        thumbnail.style.opacity = 0;
                     });
 
-                    // Show thumbnail when video is paused/stopped
-                    video.addEventListener("pause", () => {
-                        thumbnail.style.opacity = "1"; // Show thumbnail
-                        thumbnail.style.pointerEvents = "auto"; // Block video interactions
+                    video.addEventListener('pause', () => {
+                        video.classList.remove('playing');
+                        if (!item.matches(':hover')) {
+                            thumbnail.style.opacity = 1;
+                        }
                     });
 
-                    video.addEventListener("ended", () => {
-                        thumbnail.style.opacity = "1"; // Show thumbnail
-                        thumbnail.style.pointerEvents = "auto"; // Block video interactions
+                    video.addEventListener('ended', () => {
+                        video.classList.remove('playing');
+                        thumbnail.style.opacity = 1;
                     });
                 }
             });
         });
+</script>
 
-
-
-    </script>
     
 </body>
 </html>
