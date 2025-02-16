@@ -51,7 +51,7 @@ include 'admin_header.php';
 
     <div class="admin_box">
       <?php
-        $select_users=mysqli_query($conn,"SELECT * FROM `register` WHERE user_type='user'") or die('query failed');
+        $select_users=mysqli_query($conn,"SELECT * FROM `users` WHERE role='student'") or die('query failed');
         $number_of_users=mysqli_num_rows($select_users);
       ?>
       <h3><?php echo $number_of_users; ?></h3>
@@ -60,7 +60,7 @@ include 'admin_header.php';
 
     <div class="admin_box">
       <?php
-        $select_admin=mysqli_query($conn,"SELECT * FROM `register` WHERE user_type='admin'") or die('query failed');
+        $select_admin=mysqli_query($conn,"SELECT * FROM `users` WHERE role='admin'") or die('query failed');
         $number_of_admin=mysqli_num_rows($select_admin);
       ?>
       <h3><?php echo $number_of_admin; ?></h3>
@@ -69,7 +69,7 @@ include 'admin_header.php';
 
     <div class="admin_box">
       <?php
-        $select_accounts=mysqli_query($conn,"SELECT * FROM `register`") or die('query failed');
+        $select_accounts=mysqli_query($conn,"SELECT * FROM `users`") or die('query failed');
         $number_of_accounts=mysqli_num_rows($select_accounts);
       ?>
       <h3><?php echo $number_of_accounts; ?></h3>

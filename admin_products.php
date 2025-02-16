@@ -191,6 +191,7 @@ if(isset($_POST['update_product'])){
     margin-top: 10px;
     font-weight: bold;
     transition: background-color 0.3s;
+    width: 30vh;
 }
 
 .product_btn:hover {
@@ -198,6 +199,15 @@ if(isset($_POST['update_product'])){
 }
 
 .product_del_btn {
+    background-color: #dc3545;
+    margin-top: 15px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    
+}
+.product_cancel_btn{
     background-color: #dc3545;
     margin-top: 15px;
     display: flex;
@@ -213,6 +223,18 @@ if(isset($_POST['update_product'])){
   text-align: center;
   color: #888;
   font-size: 18px;
+}
+
+#update-container{
+  height: 45%;
+  width: 40%;
+  padding: 10, 0, 0, 10;
+}
+#buttons{
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+
 }
 
 </style>
@@ -289,10 +311,10 @@ include 'admin_header.php';
         while($fetch_update=mysqli_fetch_assoc($update_query)){
   ?>
 
-  <form action="" method="post" enctype="multipart/form-data">
+  <form action="" method="post" enctype="multipart/form-data" id="update-container">
     <input type="hidden" name="update_p_id" value="<?php echo $fetch_update['id'];?>">
     <input type="hidden" name="update_old_img" value="<?php echo $fetch_update['image'];?>">
-    <input type="hidden" name="update_old_pdf" value="<?php echo $fetch_update['pdf'];?>">
+    <input type="hidden" name="update_old_pdf" value="<?php echo $fetch_update['file'];?>">
 
     <img src="./uploaded_img/<?php echo $fetch_update['image'];?>" alt="">
 
@@ -302,9 +324,12 @@ include 'admin_header.php';
     <input type="file" name="update_pdf" class="admin_input update_box" accept="application/pdf">
     <textarea name="update_abstract" class="admin_input update_box" required placeholder="Enter Abstract"><?php echo $fetch_update['abstract']; ?></textarea>
 
-    
-    <input type="submit" value="update" name="update_product" class="product_btn">
-    <input type="reset" value="cancel" id="close_update" class="product_btn product_del_btn">
+    <div id="buttons">
+
+
+      <input type="submit" value="update" name="update_product" class="product_btn">
+      <input type="reset" value="cancel" id="close_update" class="product_btn product_cancel_btn">
+    </div>
   </form>
 
 
