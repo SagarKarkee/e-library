@@ -1,35 +1,39 @@
 <?php
-
 include 'config.php';
 session_start();
 
-if(isset($_POST['submit'])){
+if(isset($_POST['submit'])) {
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-    $email=mysqli_real_escape_string($conn,$_POST['email']);
-    $password=mysqli_real_escape_string($conn,md5($_POST['password']) );
+    // Fetch user data using only email (do not check password in SQL)
+    $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE email='$email'") or die('Query failed');
 
-    $select_users=mysqli_query($conn,"SELECT * FROM `register` WHERE email='$email' AND password='$password'") or die('query failed');
+    if(mysqli_num_rows($select_users) > 0) {
+        $row = mysqli_fetch_assoc($select_users);
 
-    if(mysqli_num_rows($select_users) > 0){
-        $row=mysqli_fetch_assoc($select_users);
-
-        if($row['user_type'] =='admin'){
-            $_SESSION['admin_name']=$row['name'];
-            $_SESSION['admin_email']=$row['email'];
-            $_SESSION['admin_id']=$row['id'];
-            header('location:admin_page.php');
-
-        }elseif($row['user_type'] =='user'){
-            $_SESSION['user_name']=$row['name'];
-            $_SESSION['user_email']=$row['email'];
-            $_SESSION['user_id']=$row['id'];
-            header('location:home.php');
+        // Verify the password using password_verify()
+        if (password_verify($password, $row['password'])) {
+            if ($row['role'] == 'admin') {
+                $_SESSION['admin_name'] = $row['name'];
+                $_SESSION['admin_email'] = $row['email'];
+                $_SESSION['admin_id'] = $row['id'];
+                header('location:admin_page.php');
+                exit();
+            } elseif ($row['role'] == 'student') {
+                $_SESSION['user_name'] = $row['name'];
+                $_SESSION['user_email'] = $row['email'];
+                $_SESSION['user_id'] = $row['id'];
+                header('location:home.php');
+                exit();
+            }
+        } else {
+            $message[] = 'Incorrect password. Please try again.';
         }
-    }else{
-        $message[]='Incorrect email or password';
+    } else {
+        $message[] = 'Email not found. Please register first.';
     }
 }
-
 ?>
 
 <!DOCTYPE html>
