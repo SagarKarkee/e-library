@@ -65,7 +65,9 @@ include 'user_header.php';
 
              <!-- Placeholder for Abstract and PDF Link -->
              <div class="abstract">Abstract: <?php echo $fetch_products['abstract']; ?></div>
-                    <a href="./uploaded_pdfs/<?php echo $fetch_products['pdf']; ?>" target="_blank" class="product_btn">View PDF</a>
+             <?php if (!empty($fetch_products['file'])) { ?>
+                <a href="./uploaded_pdfs/<?php echo $fetch_products['file']; ?>" target="_blank" class="product_btn">View PDF</a>
+            <?php } ?>
 
             <input type="submit" value="Add to Cart" name="add_to_cart" class="product_btn">
 
