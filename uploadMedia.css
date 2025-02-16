@@ -114,14 +114,22 @@ h2, h3, h4 {
     object-fit: cover;
 }
 
-/* Media Items */
+/* After uploading the medias */
+.media-container {
+    display: flex;
+    flex-wrap: nowrap; /* Keeps items in a single row */
+    gap: 15px; /* Adds spacing between items */
+    overflow-x: auto; /* Enables horizontal scrolling if needed */
+    padding: 10px;
+}
+
 .media-item {
-    background: #ffffff;
-    padding: 1.5rem;
-    margin: 2rem auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
+    flex: 0 0 auto; /* Prevents items from shrinking */
+    width: 250px; /* Adjust width as needed */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f9f9f9;
     text-align: center;
 }
 
@@ -132,12 +140,10 @@ h2, h3, h4 {
 }
 
 .media-item img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    margin: 1rem 0;
+    width: 100%; /* Ensures images fit within container */
+    max-height: 150px;
+    object-fit: cover;
     border-radius: 5px;
-    border: 2px solid #ddd;
 }
 
 .media-item audio {
@@ -197,12 +203,14 @@ h2, h3, h4 {
     background-color: #e74c3c;
     color: #fff;
     border: none;
+    border-radius: 20%;
     cursor: pointer;
     font-weight: 600;
+    width:100%;
 }
 
 .media-item .delete-btn:hover {
-    background-color: #c0392b;
+    background-color: #f98073;
 }
 
 /* Responsive Design */
