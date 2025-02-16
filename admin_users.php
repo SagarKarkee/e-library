@@ -35,7 +35,7 @@ include 'admin_header.php';
 <section class="admin_users">
   <div class="admin_box_container">
     <?php
-      $select_users=mysqli_query($conn,"SELECT * FROM `register`");
+      $select_users=mysqli_query($conn,"SELECT * FROM `users`");
 
       while($fetch_users=mysqli_fetch_assoc($select_users)){
 
@@ -43,7 +43,7 @@ include 'admin_header.php';
     <div class="admin_box">
       <p>Username : <span><?php echo $fetch_users['name']?></span></p>
       <p>Email : <span><?php echo $fetch_users['email']?></span></p>
-      <p>Usertype : <span style="color:<?php if($fetch_users['user_type']=='admin'){echo 'blue';}else{echo 'green';}?>"><?php echo $fetch_users['user_type']?></span></p>
+      <p>Usertype : <span style="color:<?php if($fetch_users['role']=='admin'){echo 'blue';}else{echo 'green';}?>"><?php echo $fetch_users['role']?></span></p>
       <a href="admin_users.php?delete=<?php echo $fetch_users['id']; ?>" onclick="return confirm('Are you sure you want to delete this user?');" class="delete-btn">delete</a>
     </div>
       <?php

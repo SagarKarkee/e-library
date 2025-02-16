@@ -1,7 +1,17 @@
-CREATE DATABASE Book;
-USE Book;
+CREATE DATABASE books;
+USE books;
 
--- Cart Table
+-- Users Table (Primary User Storage)
+CREATE TABLE `users` (
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR(100) NOT NULL,
+    `email` VARCHAR(100) NOT NULL UNIQUE,
+    `password` VARCHAR(255) NOT NULL,
+    `role` ENUM('admin', 'student') DEFAULT 'student',
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Cart Table (References `users`)
 CREATE TABLE `cart` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `user_id` INT NOT NULL,
@@ -13,7 +23,7 @@ CREATE TABLE `cart` (
     FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE
 );
 
--- Message Table
+-- Message Table (References `users`)
 CREATE TABLE `message` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `user_id` INT NOT NULL,
@@ -25,7 +35,7 @@ CREATE TABLE `message` (
     FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE
 );
 
--- Orders Table
+-- Orders Table (References `users`)
 CREATE TABLE `orders` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `user_id` INT NOT NULL,
@@ -36,44 +46,34 @@ CREATE TABLE `orders` (
     `address` VARCHAR(500) NOT NULL,
     `total_products` VARCHAR(1000) NOT NULL,
     `total_price` INT NOT NULL,
-    `placed_on` VARCHAR(50) NOT NULL,
+    `placed_on` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Fixed datatype
     `payment_status` VARCHAR(20) NOT NULL DEFAULT 'pending',
     PRIMARY KEY (`id`),
     FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE
 );
 
--- Products Table
+-- Products Table (Updated)
 CREATE TABLE `products` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(100) NOT NULL,
     `price` INT NOT NULL,
     `image` VARCHAR(100) NOT NULL,
+    `file` VARCHAR(255) NOT NULL,  
+    `abstract` VARCHAR(500) NOT NULL,
     PRIMARY KEY (`id`)
 );
 
--- Register Table
-CREATE TABLE `register` (
+
+-- Media Files Table
+CREATE TABLE `media_files` (
     `id` INT NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(100) NOT NULL,
-    `email` VARCHAR(100) NOT NULL,
-    `password` VARCHAR(100) NOT NULL,
-    `user_type` VARCHAR(20) NOT NULL DEFAULT 'user',
+    `filename` VARCHAR(255) NOT NULL,
+    `file_path` VARCHAR(255) NOT NULL,
+    `thumbnail_path` VARCHAR(255),
+    `file_type` ENUM('audio', 'video') NOT NULL,
+    `upload_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `title` VARCHAR(255),
     PRIMARY KEY (`id`)
 );
-
---media table
-CREATE TABLE media_files (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    filename VARCHAR(255) NOT NULL,
-    file_path VARCHAR(255) NOT NULL,
-    file_type ENUM('audio', 'video') NOT NULL,
-    upload_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    title VARCHAR(255)
-);
-
---also add the this to the media table
-ALTER TABLE media_files
-ADD COLUMN thumbnail_path VARCHAR(255) AFTER file_path;
-
 
 COMMIT;

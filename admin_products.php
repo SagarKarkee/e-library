@@ -28,7 +28,7 @@ if(isset($_POST['add_products_btn'])){
   if(mysqli_num_rows($select_product_name)>0){
     $message[]='The given product is already added';
   }else{
-    $add_product_query=mysqli_query($conn,"INSERT INTO `products`(name,price,image,abstract,pdf) VALUES ('$name','$price','$image','$abstract','$pdf')") or die('query2 failed');
+    $add_product_query = mysqli_query($conn,"INSERT INTO `products`(name, price, image, file, abstract) VALUES ('$name', '$price', '$image', '$pdf', '$abstract')") or die('Query failed');
 
     if($add_product_query){
       if($image_size>2000000){
@@ -62,7 +62,7 @@ if(isset($_POST['update_product'])){
   $update_abstract = mysqli_real_escape_string($conn, $_POST['update_abstract']); // Handle abstract
 
   // Update the product details (name, price, abstract)
-  mysqli_query($conn, "UPDATE `products` SET name='$update_name', price='$update_price', abstract='$update_abstract' WHERE id='$update_p_id'") or die('query failed');
+  mysqli_query($conn, "UPDATE `products` SET name='$update_name', price='$update_price', abstract='$update_abstract', file='$update_pdf' WHERE id='$update_p_id'") or die('Query failed');
 
   // Handle image upload (if new image is provided)
   $update_image = $_FILES['update_image']['name'];
@@ -266,7 +266,7 @@ include 'admin_header.php';
       </div>
 
       <!-- PDF Download Link -->
-      <a href="./uploaded_pdfs/<?php echo $fetch_products['pdf']; ?>" class="product_btn" target="_blank">View PDF</a>
+      <a href="./uploaded_pdfs/<?php echo $fetch_products['file']; ?>" class="product_btn" target="_blank">View PDF</a>
 
       <a href="admin_products.php?update=<?php echo $fetch_products['id']?>" class="product_btn">Update</a>
 

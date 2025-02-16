@@ -1,33 +1,38 @@
 <?php
-
 include 'config.php';
 
-if(isset($_POST['submit'])){
+if(isset($_POST['submit'])) {
+    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
+    $user_type = $_POST['user_type'];
 
-    $name=mysqli_real_escape_string($conn,$_POST['name']);
-    $email=mysqli_real_escape_string($conn,$_POST['email']);
-    $password=mysqli_real_escape_string($conn,md5($_POST['password']) );
-    $cpassword=mysqli_real_escape_string($conn,md5($_POST['cpassword']) );
-    $user_type=$_POST['user_type'];
-
-    $select_users=mysqli_query($conn,"SELECT * FROM `users` WHERE email='$email' AND password='$password'") or die('query failed');
+    // Check if email already exists
+    $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE email='$email'") or die('Query failed');
 
     if(mysqli_num_rows($select_users) > 0){
-        $message[]='User already exists!';
-    }else{
-        if($password!=$cpassword){
-            $message[]='Confirm password not matched!';
-        }
-        else{
-            mysqli_query($conn,"INSERT INTO `register`(name,email, password, user_type) VALUES('$name','$email','$cpassword','$user_type')") or die('query failed');
-            $message[]='Registered Successfully!';
+        $message[] = 'User already exists!';
+    } else {
+        // Check if passwords match
+        if ($password !== $cpassword) {
+            $message[] = 'Confirm password does not match!';
+        } else {
+            // Hash the password before inserting
+            $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+            
+            // Insert user data into `users` table
+            $insert_query = "INSERT INTO `users` (name, email, password, role) VALUES ('$name', '$email', '$hashed_password', '$user_type')";
+            mysqli_query($conn, $insert_query) or die('Query failed');
+
+            $message[] = 'Registered Successfully!';
             header('location:login.php');
+            exit(); 
         }
-        
     }
 }
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +43,7 @@ if(isset($_POST['submit'])){
     <title>Register Form</title>
 
     <!-- Font awesome Link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
 
     <!-- Css File Link -->
     <link rel="stylesheet" href="login.css">
@@ -48,10 +53,10 @@ if(isset($_POST['submit'])){
 
 <?php
 if(isset($message)){
-    foreach($message as $message){
+    foreach($message as $msg){
         echo '
         <div class="message">
-            <span>'.$message.'</span>
+            <span>'.$msg.'</span>
             <i class="fa-solid fa-xmark" onclick="this.parentElement.remove();"></i>
         </div>
     ';    
@@ -62,50 +67,47 @@ if(isset($message)){
 <div class="box">
     <span class="borderline"></span>
     <form action="" method="post">
-    <h2>Register</h2>
+        <h2>Register</h2>
+
         <div class="inputbox">
-            <input type="text" name="name" required="required">
+            <input type="text" name="name" required>
             <span>Name</span>
             <i></i>
         </div>
 
         <div class="inputbox">
-            <input type="email" name="email" required="required">
+            <input type="email" name="email" required>
             <span>Email</span>
             <i></i>
         </div>
 
         <div class="inputbox">
-            <input type="password" name="password" required="required">
+            <input type="password" name="password" required>
             <span>Password</span>
             <i></i>
         </div>
 
         <div class="inputbox">
-            <input type="password" name="cpassword" required="required">
+            <input type="password" name="cpassword" required>
             <span>Confirm Password</span>
             <i></i>
         </div>
         
         <div class="inputbox">
-            <select name="user_type" >
-                <option value="user">User</option>
+            <select name="user_type">
+                <option value="student">Student</option>
                 <option value="admin">Admin</option>
             </select>
         <i></i>
         </div>
-        
         
         <div class="links">
             <a href="#">Forgot Password</a>
             <a href="login.php">Login</a>
         </div>
 
-
         <input type="submit" value="Register Now" name="submit">
-    
     </form>
-    
 </div>
 
 <script src="https://kit.fontawesome.com/eedbcd0c96.js" crossorigin="anonymous"></script>
