@@ -10,7 +10,7 @@ if(!isset($admin_id)){
 
 if(isset($_GET['delete'])){
   $delete_id=$_GET['delete'];
-  mysqli_query($conn,"DELETE FROM `register` WHERE id='$delete_id'");
+  mysqli_query($conn,"DELETE FROM `users` WHERE id='$delete_id'");
   $message[]='1 user has been deleted';
   header("location:admin_users.php");
 }
@@ -57,6 +57,7 @@ include 'admin_header.php';
 
 <script src="admin_js.js"></script>
 <script src="https://kit.fontawesome.com/eedbcd0c96.js" crossorigin="anonymous"></script>
+<script src="ajax.js"></script>
 
 </body>
 </html>

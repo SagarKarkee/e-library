@@ -66,7 +66,7 @@ if(isset($message)){
 
 <div class="box">
     <span class="borderline"></span>
-    <form action="" method="post">
+    <form id="registerForm" action="" method="post">
         <h2>Register</h2>
 
         <div class="inputbox">
@@ -106,10 +106,11 @@ if(isset($message)){
             <a href="login.php">Login</a>
         </div>
 
-        <input type="submit" value="Register Now" name="submit">
+        <input type="submit" value="Sign Up" name="submit" class="ajax-submit">
     </form>
 </div>
 
 <script src="https://kit.fontawesome.com/eedbcd0c96.js" crossorigin="anonymous"></script>
+<script src="ajax.js"></script>
 </body>
 </html>

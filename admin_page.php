@@ -92,6 +92,7 @@ include 'admin_header.php';
 
 <script src="admin_js.js"></script>
 <script src="https://kit.fontawesome.com/eedbcd0c96.js" crossorigin="anonymous"></script>
+<script src="ajax.js"></script>
 
 </body>
 </html>

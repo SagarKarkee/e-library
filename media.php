@@ -133,50 +133,11 @@ if (!isset($user_id)) {
 
 
 <?php include 'footer.php';?>
-
+<script src="script.js"></script>
 
     <script src="https://kit.fontawesome.com/eedbcd0c96.js" crossorigin="anonymous"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Handle video interactions
-            document.querySelectorAll('.media-item').forEach(item => {
-                const video = item.querySelector('video');
-                const thumbnail = item.querySelector('.media-thumbnail');
-
-                if (video) {
-                    // Play/pause on click
-                    item.addEventListener('click', function(e) {
-                        if (video.paused) {
-                            video.play();
-                            video.classList.add('playing');
-                        } else {
-                            video.pause();
-                            video.classList.remove('playing');
-                        }
-                    });
-
-                    // Handle video states
-                    video.addEventListener('play', () => {
-                        video.classList.add('playing');
-                        thumbnail.style.opacity = 0;
-                    });
-
-                    video.addEventListener('pause', () => {
-                        video.classList.remove('playing');
-                        if (!item.matches(':hover')) {
-                            thumbnail.style.opacity = 1;
-                        }
-                    });
-
-                    video.addEventListener('ended', () => {
-                        video.classList.remove('playing');
-                        thumbnail.style.opacity = 1;
-                    });
-                }
-            });
-        });
-</script>
-
+    <script src="script.js"></script>
+    <script src="ajax.js"></script>
     
 </body>
 </html>

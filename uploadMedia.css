@@ -117,10 +117,11 @@ h2, h3, h4 {
 /* After uploading the medias */
 .media-container {
     display: flex;
-    flex-wrap: nowrap; /* Keeps items in a single row */
-    gap: 15px; /* Adds spacing between items */
+    flex-wrap: nowrap; 
+    gap: 15px; 
     overflow-x: auto; /* Enables horizontal scrolling if needed */
     padding: 10px;
+    
 }
 
 .media-item {

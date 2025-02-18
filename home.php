@@ -61,7 +61,7 @@ if (isset($_POST['add_to_cart'])) {
         while ($fetch_products = mysqli_fetch_assoc($select_products)) {
 
       ?>
-          <form action="" method="post" class="pro_box">
+          <form action="" method="post" class="pro_box ajax-form">
             <img src="./uploaded_img/<?php echo $fetch_products['image']; ?>" alt="">
             <h3><?php echo $fetch_products['name']; ?></h3>
             <p>Rs. <?php echo $fetch_products['price']; ?>/-</p>

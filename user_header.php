@@ -29,10 +29,7 @@ if(isset($message)){
         <a href="about.php">About</a>
       </nav>
 
-      <!-- <div class="last_part">
-        <div class="loginorreg">
-          <p>New <a href="login.php">Login</a> | <a href="register.php">Register</a></p>
-        </div> -->
+      
 
         <div class="icons">
         <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
