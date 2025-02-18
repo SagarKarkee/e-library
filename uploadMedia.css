@@ -121,7 +121,7 @@ h2, h3, h4 {
     gap: 15px; 
     overflow-x: auto; /* Enables horizontal scrolling if needed */
     padding: 10px;
-    height: 80vh;
+    
 }
 
 .media-item {
