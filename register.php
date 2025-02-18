@@ -106,7 +106,7 @@ if(isset($message)){
             <a href="login.php">Login</a>
         </div>
 
-        <input type="submit" value="Register Now" name="submit">
+        <input type="submit" value="Sign Up" name="submit">
     </form>
 </div>
 
